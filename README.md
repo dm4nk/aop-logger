@@ -53,7 +53,7 @@ Add to `pom.xml`
   <dependency>
       <groupId>com.github.dm4nk</groupId>
       <artifactId>aop-logger</artifactId>
-      <version>master-SNAPSHOT</version>
+      <version>1.0</version>
   </dependency>
 </dependencies>
 ```
