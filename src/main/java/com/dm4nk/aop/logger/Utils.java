@@ -49,23 +49,18 @@ class Utils {
     void classAnnotationLog(JoinPoint joinPoint, Object result) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        LogMethod logMethod = method.getAnnotation(LogMethod.class);
-        if (logMethod != null) {
+        if (method.getAnnotation(LogMethod.class) != null) {
             return;
         }
 
         Loggable classAnnotation = method.getDeclaringClass().getAnnotation(Loggable.class);
 
         if (classAnnotation.excludeMethods()) {
-            IncludeLog includeLog = method.getAnnotation(IncludeLog.class);
-
-            if (includeLog != null) {
+            if (method.getAnnotation(IncludeLog.class) != null) {
                 methodAnnotationLog(joinPoint, true, classAnnotation.level(), result);
             }
         } else {
-            ExcludeLog excludeLog = method.getAnnotation(ExcludeLog.class);
-
-            if (excludeLog == null) {
+            if (method.getAnnotation(ExcludeLog.class) == null) {
                 methodAnnotationLog(joinPoint, true, classAnnotation.level(), result);
             }
         }
