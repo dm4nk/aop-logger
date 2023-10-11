@@ -89,7 +89,7 @@ class Utils {
                         this::getParameterString
                 )
                 .zipWith(
-                        Arrays.stream(signature.getMethod().getParameterAnnotations()).map(this::isParameterIncluded)
+                        Arrays.stream(signature.getMethod().getParameterAnnotations()).map(Utils::isParameterIncluded)
                 )
                 .filterValues(Boolean::booleanValue)
                 .keys()
@@ -105,22 +105,6 @@ class Utils {
         log(message, level, logger);
     }
 
-    private static void log(String message, Level level, Logger logger) {
-        Optional.ofNullable(LEVEL_TO_LOG.get(level))
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format(NO_SUCH_LEVEL_PATTERN, level, LEVEL_TO_LOG.keySet()))
-                )
-                .accept(logger, message);
-    }
-
-    private static boolean isLoggingEnabled(Level level, Logger logger) {
-        return Optional.ofNullable(LEVEL_TO_LOGGING_ENABLED.get(level))
-                .orElseThrow(() -> new IllegalArgumentException(
-                        String.format(NO_SUCH_LEVEL_PATTERN, level, LEVEL_TO_LOG.keySet()))
-                )
-                .apply(logger);
-    }
-
     private String getParameterString(String argumentName, Object argumentValue) {
         try {
             argumentValue = objectMapper.writeValueAsString(argumentValue);
@@ -128,10 +112,6 @@ class Utils {
             argumentValue = String.valueOf(argumentValue);
         }
         return String.format(ARG_FORMAT, argumentName, argumentValue);
-    }
-
-    private boolean isParameterIncluded(Annotation[] annotations) {
-        return Arrays.stream(annotations).noneMatch(annotation -> annotation instanceof ExcludeLog);
     }
 
     private String calculateMessage(String methodName, String args, Object result, boolean withResult) {
@@ -146,5 +126,25 @@ class Utils {
         } else {
             return String.format(WITHOUT_RESULT_PATTERN, methodName, args);
         }
+    }
+
+    private static boolean isParameterIncluded(Annotation[] annotations) {
+        return Arrays.stream(annotations).noneMatch(annotation -> annotation instanceof ExcludeLog);
+    }
+
+    private static void log(String message, Level level, Logger logger) {
+        Optional.ofNullable(LEVEL_TO_LOG.get(level))
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format(NO_SUCH_LEVEL_PATTERN, level, LEVEL_TO_LOG.keySet()))
+                )
+                .accept(logger, message);
+    }
+
+    private static boolean isLoggingEnabled(Level level, Logger logger) {
+        return Optional.ofNullable(LEVEL_TO_LOGGING_ENABLED.get(level))
+                .orElseThrow(() -> new IllegalArgumentException(
+                        String.format(NO_SUCH_LEVEL_PATTERN, level, LEVEL_TO_LOGGING_ENABLED.keySet()))
+                )
+                .apply(logger);
     }
 }
