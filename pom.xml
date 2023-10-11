@@ -6,7 +6,7 @@
 
   <groupId>com.dm4nk</groupId>
   <artifactId>aop-logger</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <packaging>jar</packaging>
 
   <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,6 +54,11 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>32.1.2-jre</version>
     </dependency>
   </dependencies>
 </project>
