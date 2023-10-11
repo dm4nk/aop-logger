@@ -31,7 +31,7 @@ Log message:
 > com.dm4nk.aoptest.Service#test(name1="Outer", name2="Inner", integer=2): {"id":1,"name":"AOP","inner":{"id":2,"name":"none"}}
 
 ---
-- `@LogMethod(logResult = false)` skips result logging.
+- `@LogMethod(logResult = false)` skips result logging
 - `@LogMethod(level = Level.INFO)` changes level of aop-logger messages. `Level.DEBUG` is set by default
 - `@Loggable(excludeMethods = true)` skips logging of all methods not annotated with `@IncludeLog`
 - `@ExcludeLog` excludes method or method parameter from logging message
@@ -53,7 +53,7 @@ Add to `pom.xml`
   <dependency>
       <groupId>com.github.dm4nk</groupId>
       <artifactId>aop-logger</artifactId>
-      <version>master-SNAPSHOT</version>
+      <version>1.0</version>
   </dependency>
 </dependencies>
 ```
