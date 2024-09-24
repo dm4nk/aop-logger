@@ -10,7 +10,6 @@ import com.google.common.collect.ImmutableMap;
 import lombok.AllArgsConstructor;
 import one.util.streamex.StreamEx;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,15 +73,11 @@ class Utils {
         }
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
-        String methodName = codeSignature.getName();
+        String methodName = signature.getName();
 
         String args = StreamEx
-                .zip(
-                        codeSignature.getParameterNames(),
-                        joinPoint.getArgs(),
-                        this::getParameterString
-                )
+                .of(joinPoint.getArgs())
+                .map(String::valueOf)
                 .zipWith(
                         Arrays.stream(signature.getMethod().getParameterAnnotations()).map(Utils::isParameterIncluded)
                 )
