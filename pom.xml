@@ -6,13 +6,13 @@
 
   <groupId>com.dm4nk</groupId>
   <artifactId>aop-logger</artifactId>
-  <version>1.1</version>
+  <version>2.0</version>
   <packaging>jar</packaging>
 
   <properties><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <spring.boot.dependencies.version>2.5.7</spring.boot.dependencies.version>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <spring.boot.dependencies.version>3.3.4</spring.boot.dependencies.version>
   </properties>
 
   <dependencyManagement>
